@@ -11,36 +11,36 @@ import numpy as np
 import time
 
 
-T_1 = time.time() #Time measurement before allocation of tasks
+T_1 = time.time() # Measurement of time before allocation of tasks commence
 
 
-lat_col = 'Lat'
-lon_col = 'Lon'
-pop_col = 'Population'
+lat_col = 'Lat' # Latitude Column
+lon_col = 'Lon' # Longitude Column
+pop_col = 'Population' # Population Column 
 
-population = pd.read_csv('Italy.csv')
-population.sort_values(by = [lat_col, lon_col])
+population = pd.read_csv('Italy.csv') # Creating a dataset to store data from the country csv
+population.sort_values(by = [lat_col, lon_col]) # Sorting the columns in the dataset by latitude and then longitude 
 
-#print(population)
+# print(population) # Printing the dataset to check the data is coherent 
 
-# Extract the data we're interested in
-lat = population[lat_col].values
-lon = population[lon_col].values
-pop_count = population[pop_col].values
+# Extract the data we're interested in: 
+lat = population[lat_col].values # Extracting the latitude column 
+lon = population[lon_col].values # Extracting the longitude column 
+pop_count = population[pop_col].values # Extracting the population column 
 
-pop_total = sum(pop_count)
+pop_total = sum(pop_count) # Checking the population total 
 
-print("Total Population: ",pop_total)
+print("Total Population: ",pop_total) # Printing the total population 
 
-T_2 = time.time()
+T_2 = time.time() # Taking the second time measurement 
 
-T_delta = T_2-T_1
+T_delta = T_2-T_1 # Finding the time taken for the creation, sorting and summing operations 
 print("__________________________________________________________")
 print("Time taken for read, sort and sum operation: ",T_delta)
 print("__________________________________________________________")
 
-core_count = 1000000
-n = int(pop_total/core_count)
+core_count = 1000000 # Hard-coded value of what the number of cores used would be 
+n = int(pop_total/core_count) # Number of people per core 
 core_number = int(pop_total/core_count)
 print("Total Number of Cores: ", core_number)
 a = round(math.sqrt(n))
